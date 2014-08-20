@@ -60,8 +60,9 @@ int cpp_main(int, char*[])
   BOOST_TEST(!is_iterator<std::string>::value);
   BOOST_TEST(!is_iterator<accident>::value);
 
-  BOOST_TEST(!is_iterator_ref(int())::value);
-  BOOST_TEST(is_iterator_ref(int*())::value);
+  int my_int;
+  BOOST_TEST(!is_iterator_ref(my_int));
+  BOOST_TEST(is_iterator_ref(&my_int));
 
 
   std::string s;
