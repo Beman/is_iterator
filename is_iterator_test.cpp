@@ -36,6 +36,12 @@ namespace
   {
     typedef int iterator_category;
   };
+
+  template <class T>
+  bool is_iterator_ref(const T&)
+  {
+    return is_iterator<T>::value;
+  }
 }
 
 int cpp_main(int, char*[])
@@ -53,6 +59,10 @@ int cpp_main(int, char*[])
   BOOST_TEST(is_iterator<std::vector<int>::const_iterator>::value);
   BOOST_TEST(!is_iterator<std::string>::value);
   BOOST_TEST(!is_iterator<accident>::value);
+
+  BOOST_TEST(!is_iterator_ref(int())::value);
+  BOOST_TEST(is_iterator_ref(int*())::value);
+
 
   std::string s;
   BOOST_TEST(f(s.begin()));
